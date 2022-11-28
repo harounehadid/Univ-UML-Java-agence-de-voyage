@@ -19,6 +19,15 @@ public class Reservation {
         this.setPassager(nauvPassager);
     }
 
+    public void afficherReservationInfo() {
+        System.out.print("\n Reservation date  " + this.d_reservation + "       ");
+        System.out.print("State  ");
+        if (this.etat) System.out.print("active");
+        else System.out.print("cancelled");
+        System.out.print("      Passenger  " + this.passager.getNom());
+        System.out.println("\n");
+    }
+
     LocalDate getD_reservation() {
         return this.d_reservation;
     }

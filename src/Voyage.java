@@ -40,6 +40,7 @@ public class Voyage {
 
         System.out.print("\nHow many stops you want to add:  ");
         int arretsNombre = keyboard.nextInt();
+        keyboard.nextLine();
 
         String arretNom;
         float d_temp;
@@ -49,11 +50,13 @@ public class Voyage {
             System.out.print("\nStop number " + i + " >>");
             System.out.print("\nEnter the name:  ");
             arretNom = keyboard.nextLine();
-            System.out.println("Enter the time (please stick to this format h.m): ");
+            System.out.println("Enter the time (please stick to this format h.m)");
             System.out.print("Arrival:  ");
             a_temp = keyboard.nextFloat();
+            keyboard.nextLine();
             System.out.print("Departure:  ");
             d_temp = keyboard.nextFloat();
+            keyboard.nextLine();
 
             this.ajouterArret(new Arret(arretNom, a_temp, d_temp));
         }
@@ -71,6 +74,25 @@ public class Voyage {
 
         if (!exists) arrets.add(nouvArret);
         else System.out.println("\nA stop with the same name already exists!");
+    }
+
+    public void afficherVoyageInfo() {
+        System.out.print("\n");
+        System.out.print("From " + this.ville_d.getNom() + " ");
+        System.out.print("to " + this.ville_a.getNom() + " ");
+        System.out.print("\n");
+        System.out.println("Departure in " + this.d_depart + " at " + this.h_depart);
+        System.out.println("Arrival in " + this.d_arrivee + " at " + this.h_arrivee);
+        System.out.print("State ");
+        if (this.etat) System.out.print("active");
+        else System.out.print("suspended");
+        System.out.print("\nStops:  ");
+        if (arrets.size() > 0) {
+            for (Arret arret : arrets) System.out.print(arret.getNom() + "  ");
+            System.out.print("\n");
+        }
+        else System.out.println("there is no stops");
+        System.out.println("");
     }
 
     Ville getVille_d() {

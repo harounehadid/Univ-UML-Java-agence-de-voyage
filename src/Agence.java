@@ -38,19 +38,63 @@ public class Agence {
                 break;
             }
         }
+
+        if (exists) System.out.println("\nWelcome back " + nom + "!");
+        else this.ajouterClient(nom, id);
     }
 
     public void ajouterClient(String nom, String id) {
         boolean newClient = true;
 
-        for (int i = 0; i < clients.size(); i++) {
-            if (clients.get(i).getId() == id) {
+        for (Client client : clients) {
+            if (client.getId().compareTo(id) == 0) {
                 newClient = false;
                 break;
             }
         }
 
-        if (newClient) clients.add(new Client(nom, id));
+        if (newClient) {
+            clients.add(new Client(nom, id));
+            System.out.println("\nClient added successfully");
+        }
+    }
+
+    public void afficherLesVoyages() {
+        if (this.voyages.size() == 0) {
+            System.out.println("\nNo trips available at the moment");
+            return;
+        }
+        
+        for (Voyage voyage : voyages) voyage.afficherVoyageInfo();
+    }
+
+    public void afficherLesVoyagesAvecIndice() {
+        if (this.voyages.size() == 0) {
+            System.out.println("\nNo trips available at the moment");
+            return;
+        }
+
+        for (int i = 0; i < this.voyages.size(); i++) {
+            System.out.println("\nVoyage number " + i);
+            this.voyages.get(i).afficherVoyageInfo();
+        }
+    }
+
+    public Voyage getVoyageObjet(int indice) {
+        if (this.voyages.size() == 0) return null;
+
+        return this.voyages.get(indice);
+    }
+
+    public void afficherToutLesReservation() {
+        if (this.clients.size() == 0) {
+            System.out.println("\nThere is no reservations to display");
+            return;
+        }
+
+        for (Client client : clients) {
+            client.afficherLesReservation();
+        }
     }
 
     String getNom() {
@@ -63,5 +107,22 @@ public class Agence {
 
     ArrayList getClients() {
         return this.clients;
+    }
+
+    Client getClient(String id) {
+        Client selectedClient = null;
+
+        for (Client client : clients) {
+            if (client.getId().compareTo(id) == 0) {
+                selectedClient = client;
+                break;
+            }
+        }
+
+        return selectedClient;
+    }
+
+    ArrayList getVoyages() {
+        return this.voyages;
     }
 }
