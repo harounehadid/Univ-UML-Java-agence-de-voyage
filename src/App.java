@@ -145,7 +145,7 @@ public class App {
 
                         do {
                             try {
-                                System.out.println("\nEnter departuer date:  ");
+                                System.out.println("\nEnter arrival date:  ");
                                 System.out.print(">> ");
                                 System.out.print(" day - ");
                                 int day = keyboard.nextInt();
